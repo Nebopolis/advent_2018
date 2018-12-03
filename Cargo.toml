@@ -1,0 +1,7 @@
+[package]
+name = "advent_2018"
+version = "0.1.0"
+authors = ["Ben Evans <bevans@zendesk.com>"]
+
+[dependencies]
+nom = "^4.1"
