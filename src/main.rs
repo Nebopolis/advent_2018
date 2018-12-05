@@ -1,12 +1,34 @@
 use std::io::{self, Read};
 use std::iter::Cycle;
 use std::collections::HashSet;
+use std::collections::HashMap;
+
 
 fn main() -> io::Result<()> {
     let mut buffer = String::new();
     io::stdin().read_to_string(&mut buffer)?;
-    println!("{:?}", problem_1_1(&buffer));
-    println!("{:?}", problem_1_2(&buffer));
+
+
+    let (mut double_count, mut triple_count) = (0, 0);
+	for line in buffer.lines() {
+		let mut map = HashMap::new();
+		for letter in line.chars() {
+			let mut count = map.entry(letter).or_insert(0);
+			*count += 1;
+		}
+		let double: bool = map.iter().filter(|(key, value)| **value == 2).count() > 0;
+		let triple: bool = map.iter().filter(|(key, value)| **value == 3).count() > 0;
+		if double {
+			double_count += 1;
+		}
+		if triple {
+			triple_count += 1;
+		}
+
+	}
+
+	println!("{:?}", (double_count, triple_count, double_count * triple_count));
+
     Ok(())
 }
 
